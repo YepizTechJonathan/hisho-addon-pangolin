@@ -1,0 +1,30 @@
+# Pangolin integration: one entry per Pangolin server (self-hosted tunnelled reverse proxy).
+# Shows its sites (online or not) and every public link (resource) with where it points, and can
+# connect the Core machine as a Pangolin site of its own (runs Newt here), so anything Hisho hosts
+# can be published through Pangolin. Needs only an API key made in Pangolin (Organization >
+# Settings > API Keys) with the Sites, Resources, Targets and Domains permissions.
+name: pangolin
+kind: integration
+secret_rotate: Pangolin > Settings > API Keys (make a new key, delete the old)
+title: Pangolin
+description: Your Pangolin servers, their sites and public links; connect this machine as a site.
+version: 0.1.1
+you_need:
+  - "A Pangolin server on a VPS outside your home network (Pangolin itself is not installed by this add-on)"
+  - "A Pangolin API key (Sites, Resources, Targets, Domains)"
+provider: provider.py
+provides: [public_links]   # other add-ons (the Web Factory) publish web links through this
+entry_label: Pangolin server
+entry_schema:
+  url: url                 # the dashboard address, e.g. https://pangolin.example.com
+  api_url: "url?"          # the integration API, if not <url>/api/v1 (e.g. https://pangolin-api.example.com/v1)
+  api_key: password        # the API key (typed, or its secret's name)
+  org: "str?"              # the organization's ID; found automatically when the key sees one
+  newt_image: "str?"       # default fosrl/newt:1.18.1
+  note: "str?"
+entry_form:
+  url: "Pangolin address (its dashboard URL)"
+  api_url: "API address (often https://pangolin-api.<your domain>/v1)"
+  api_key: "API key (paste it, or its secret's name)"
+  org: "Organization ID (in your Pangolin address after the domain; empty only with a server-wide key)"
+  note: "Note"
