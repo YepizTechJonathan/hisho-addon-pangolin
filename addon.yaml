@@ -8,7 +8,7 @@ kind: integration
 secret_rotate: Pangolin > Settings > API Keys (make a new key, delete the old)
 title: Pangolin
 description: Your Pangolin servers, their sites and public links; connect this machine as a site.
-version: 0.1.2
+version: 0.2.0
 you_need:
   - "A Pangolin server on a VPS outside your home network (Pangolin itself is not installed by this add-on)"
   - "A Pangolin API key (Sites, Resources, Targets, Domains)"
@@ -25,8 +25,8 @@ entry_schema:
 entry_form:
   url: "Pangolin address (its dashboard URL)"
   api_url: "API address (often https://pangolin-api.<your domain>/v1)"
-  api_key: "API key (paste it, or its secret's name)"
   org: "Organization ID (in your Pangolin address after the domain; empty only with a server-wide key)"
+  api_key: "API key (paste it, or its secret's name)"
   note: "Note"
 
 help:
@@ -34,18 +34,20 @@ help:
     label: Pangolin address
     say: "The web address you open to see your Pangolin dashboard, like https://pangolin.example.com."
     get: "https://docs.pangolin.net/manage/integration-api"
-    get_label: Read Pangolin's guide
+    get_label: Read Pangolin's guide to its API
   api_url:
     label: API address
     say: "Where Pangolin's integration API answers, often https://pangolin-api.example.com/v1. Leave it empty if it is your Pangolin address followed by /api/v1. The API must be turned on in Pangolin's settings first."
     get: "https://docs.pangolin.net/manage/integration-api"
     get_label: How to turn on the API
-  api_key:
-    say: "A key Hisho signs in with. Make it in Pangolin under your organization's API Keys, with only the Sites, Resources, Targets and Domains permissions. Paste it, or type the name of the secret you saved it under."
-    get: "https://docs.pangolin.net/manage/integration-api"
-    get_label: How to make a key
   org:
     label: Organization ID
-    say: "Your organization's short ID: the part right after the domain when you open it in Pangolin. Leave it empty if the key belongs to one organization; Hisho finds it."
+    say: "Your organization's short ID: the part right after the domain when you open it in Pangolin, like example-co in https://pangolin.example.com/example-co/settings. Leave it empty only for a server-wide key that sees one organization; Hisho finds it."
+    get: "{url}"
+    get_label: Open Pangolin to see it
+  api_key:
+    say: "A key Hisho signs in with. Type the address and Organization ID above, then press the link: it opens Pangolin's page for a new API key in that organization. Name it Hisho, turn on only Sites, Resources, Targets and Domains, create it and paste the key here (Pangolin shows it once). Or type the name of the secret you saved it under."
+    get: "{url}/{org}/settings/api-keys/create"
+    get_label: Make the key in Pangolin
   note:
     say: "Anything that helps you remember this server, like what it hosts."

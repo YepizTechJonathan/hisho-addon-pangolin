@@ -151,3 +151,12 @@ def test_public_links_are_a_capability_pangolin_provides(fleet, tmp_path, monkey
     assert "now goes to kihon" in r["message"]
     assert mod.unpublish_link(ents, ctx, "nope.example.dev")["message"] == "nope.example.dev was not published"
 
+
+
+def test_the_key_help_links_straight_to_pangolins_new_key_page(addon):
+    h = addons.field_help(addon)
+    assert h["api_key"]["get"] == "{url}/{org}/settings/api-keys/create"
+    form = list(addon.manifest["entry_form"])
+    assert form.index("org") < form.index("api_key")          # typed first, so the link can be filled in
+    assert "connect" not in addon.manifest and "discover" not in addon.manifest
+    assert addons.validate_manifest(addon.manifest) == []

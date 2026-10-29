@@ -41,9 +41,11 @@ Its card shows each Pangolin server's sites and public links, online or not. On 
 ## Settings
 
 One entry per Pangolin server: its dashboard address, its API address (often
-`https://pangolin-api.<your domain>/v1`), an API key and the organization's ID. Make the key in
-Pangolin: Organization > Settings > API Keys, with the Sites, Resources, Targets and Domains
-permissions. Entries are kept in `~/Hisho/System/Config/Addons/pangolin.yaml`. To rotate: Pangolin >
+`https://pangolin-api.<your domain>/v1`), the organization's ID and an API key. Once the address and
+organization are typed, the key field's **Make the key in Pangolin** link opens Pangolin's new-key page for that
+organization (`<address>/<organization>/settings/api-keys/create`): name it Hisho, turn on only the Sites,
+Resources, Targets and Domains permissions, and paste the key (Pangolin shows it once). Pangolin has no
+supported way to make a key from a login, so this one step stays by hand. Entries are kept in `~/Hisho/System/Config/Addons/pangolin.yaml`. To rotate: Pangolin >
 Settings > API Keys (make a new key, delete the old).
 
 ## How to remove
